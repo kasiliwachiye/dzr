@@ -2,22 +2,14 @@ const express = require("express");
 const bp = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const axios = require("axios");
 const app = express();
 
 dotenv.config();
 
 const PORT = process.env.PORT || 6969;
 
-// Configure CORS options
-const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-  ],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
 // Apply middlewares
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
@@ -25,11 +17,20 @@ app.use(bp.urlencoded({ extended: true }));
 // Middleware for CORS
 app.use(cors());
 
-// Routes
+// ROUTES
+// Searching for tracks
+app.get("/search", async (req, res) => {
+  try {
+    const query = req.query.q;
+    const deezerUrl = `https://api.deezer.com/search?q=${query}`;
+    const response = await axios.get(deezerUrl);
 
-// Test route:
-app.get("/", (req, res) => {
-  res.send("Hello world");
+    // Send the Deezer API response to the client
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 // Start the server
