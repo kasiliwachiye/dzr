@@ -54,7 +54,7 @@ const SearchResults = () => {
         <ul className="p-5 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {searchResults.map((track) => (
             <li key={track.id} className="m-2">
-              <img src={track.album.cover_small} alt="album-art" />
+              <img src={track.album.cover_small} alt="album-art" className=" mask mask-squircle" />
               <p className="text-xs mt-1">{track.duration}</p>
               <p className="font-bold text-sm">{track.title}</p>
               <Link

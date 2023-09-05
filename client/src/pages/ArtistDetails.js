@@ -32,24 +32,28 @@ const ArtistDetails = () => {
   return (
     <div>
       {loading ? (
-        <p>Loading...</p>
+        <p className="p-5">Loading...</p>
       ) : (
-        <div>
+        <div className="p-5">
           <h1>{artistInfo.name}</h1>
           <p>Total Fans: {artistInfo.nb_fan}</p>
           <p>Top 5 Tracks:</p>
           <ul>
-            {artistInfo.top_tracks.data.map((track) => (
-              <li key={track.id}>{track.title}</li>
-            ))}
+            {artistInfo.top_tracks && artistInfo.top_tracks.data
+              ? artistInfo.top_tracks.data.map((track) => (
+                  <li key={track.id}>{track.title}</li>
+                ))
+              : "No top tracks available"}
           </ul>
           <p>List of Albums:</p>
           <ul>
-            {artistInfo.albums.data.map((album) => (
-              <li key={album.id}>
-                <Link to={`/album/${album.id}`}>{album.title}</Link>
-              </li>
-            ))}
+            {artistInfo.albums && artistInfo.albums.data
+              ? artistInfo.albums.data.map((album) => (
+                  <li key={album.id}>
+                    <Link to={`/album/${album.id}`}>{album.title}</Link>
+                  </li>
+                ))
+              : "No albums available"}
           </ul>
         </div>
       )}
