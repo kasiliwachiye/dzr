@@ -11,9 +11,7 @@ const Home = () => {
     async function fetchData() {
       try {
         // Fetch data for the banner artist
-        const bannerResponse = await fetch(
-          "https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=the1975"
-        );
+        const bannerResponse = await fetch("http://localhost:6969/search?q=the1975");
 
         if (!bannerResponse.ok) {
           throw new Error("Network response was not ok");
@@ -23,9 +21,7 @@ const Home = () => {
         setBannerArtist(bannerData);
 
         // Fetch data for trending tracks
-        const trendingResponse = await fetch(
-          "https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart/0/tracks"
-        );
+        const trendingResponse = await fetch("http://localhost:6969/trending");
 
         if (!trendingResponse.ok) {
           throw new Error("Network response was not ok");
@@ -35,9 +31,7 @@ const Home = () => {
         setTrendingTracks(trendingData.data);
 
         // Fetch data for charting albums
-        const chartingResponse = await fetch(
-          "https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart/0/albums"
-        );
+        const chartingResponse = await fetch("http://localhost:6969/charting");
 
         if (!chartingResponse.ok) {
           throw new Error("Network response was not ok");
@@ -97,7 +91,7 @@ const Home = () => {
               <img
                 src={bannerArtist.data[14].artist.picture_xl}
                 alt="sample-cover"
-                className="w-full h-full object-cover md:h-4/5 lg:h-4/5"
+                className="w-full h-full object-cover md:h-4/5 lg:h-2/3"
               />
               <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
                 <p className="text-white text-2xl font-bold bg-black bg-opacity-50 p-4 font-serif italic">

@@ -11,8 +11,9 @@ const ArtistDetails = () => {
   useEffect(() => {
     async function fetchArtistInfo() {
       try {
+        // Fetch artist info from your backend server
         const artistResponse = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}`
+          `http://localhost:6969/artist/${artistId}`
         );
 
         if (!artistResponse.ok) {
@@ -20,12 +21,11 @@ const ArtistDetails = () => {
         }
 
         const artistData = await artistResponse.json();
-
         setArtistInfo(artistData);
 
         // Fetch top tracks
         const topTracksResponse = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}/top?limit=5`
+          `http://localhost:6969/artist/${artistId}/top`
         );
 
         if (!topTracksResponse.ok) {
@@ -33,12 +33,11 @@ const ArtistDetails = () => {
         }
 
         const topTracksData = await topTracksResponse.json();
-
-        setTopTracks(topTracksData.data);
+        setTopTracks(topTracksData);
 
         // Fetch top albums
         const allAlbumsResponse = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}/albums`
+          `http://localhost:6969/artist/${artistId}/albums`
         );
 
         if (!allAlbumsResponse.ok) {
@@ -46,9 +45,8 @@ const ArtistDetails = () => {
         }
 
         const allAlbumsData = await allAlbumsResponse.json();
+        setAllAlbums(allAlbumsData);
 
-        setAllAlbums(allAlbumsData.data);
-        console.log(artistInfo);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching artist data:", error);
