@@ -11,12 +11,12 @@ const ArtistDetails = () => {
   useEffect(() => {
     async function fetchArtistInfo() {
       try {
-        const artistResponse = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}`
-        );
         // const artistResponse = await fetch(
-        //   `http://localhost:6969/artist/${artistId}`
+        //   `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}`
         // );
+        const artistResponse = await fetch(
+          `http://localhost:6969/artist/${artistId}`
+        );
 
         if (!artistResponse.ok) {
           throw new Error("Network response was not ok");
@@ -27,12 +27,12 @@ const ArtistDetails = () => {
         setArtistInfo(artistData);
 
         // Fetch top tracks
-        const topTracksResponse = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}/top?limit=5`
-        );
         // const topTracksResponse = await fetch(
-        //   `http://localhost:6969/artist/${artistId}/top`
+        //   `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}/top?limit=5`
         // );
+        const topTracksResponse = await fetch(
+          `http://localhost:6969/artist/${artistId}/top`
+        );
 
         if (!topTracksResponse.ok) {
           throw Error("Network response for top tracks was not ok");
@@ -40,16 +40,16 @@ const ArtistDetails = () => {
 
         const topTracksData = await topTracksResponse.json();
 
-        setTopTracks(topTracksData.data);
-        // setTopTracks(topTracksData);
+        // setTopTracks(topTracksData.data);
+        setTopTracks(topTracksData);
 
         // Fetch top albums
-        const allAlbumsResponse = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}/albums`
-        );
         // const allAlbumsResponse = await fetch(
-        //   `http://localhost:6969/artist/${artistId}/albums`
+        //   `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistId}/albums`
         // );
+        const allAlbumsResponse = await fetch(
+          `http://localhost:6969/artist/${artistId}/albums`
+        );
 
         if (!allAlbumsResponse.ok) {
           throw new Error("Network response for top albums was not ok");
@@ -57,8 +57,8 @@ const ArtistDetails = () => {
 
         const allAlbumsData = await allAlbumsResponse.json();
 
-        setAllAlbums(allAlbumsData.data);
-        // setAllAlbums(allAlbumsData);
+        // setAllAlbums(allAlbumsData.data);
+        setAllAlbums(allAlbumsData);
         console.log(artistInfo);
         setLoading(false);
       } catch (error) {

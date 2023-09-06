@@ -19,7 +19,7 @@ const SearchResults = () => {
     async function fetchSearchResults() {
       try {
         const response = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${query}`
+          `http://localhost:6969/search?q=${query}`
         );
 
         if (!response.ok) {

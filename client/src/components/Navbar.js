@@ -13,10 +13,10 @@ const Navbar = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${query}`
-      );
-      // const response = await fetch(`http://localhost:6969/search?q=${query}`);
+      // const response = await fetch(
+      //   `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${query}`
+      // );
+      const response = await fetch(`http://localhost:6969/search?q=${query}`);
       
       if (!response.ok) {
         throw new Error("Network response was not ok");
