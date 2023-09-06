@@ -11,7 +11,11 @@ const Home = () => {
     async function fetchData() {
       try {
         // Fetch data for the banner artist
-        const bannerResponse = await fetch("http://localhost:6969/search?q=the1975");
+        const bannerResponse = await fetch(
+          "https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=the1975"
+        );
+        // const bannerResponse = await fetch("http://localhost:6969/search?q=the1975");
+
 
         if (!bannerResponse.ok) {
           throw new Error("Network response was not ok");
@@ -21,7 +25,11 @@ const Home = () => {
         setBannerArtist(bannerData);
 
         // Fetch data for trending tracks
-        const trendingResponse = await fetch("http://localhost:6969/trending");
+        const trendingResponse = await fetch(
+          "https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart/0/tracks"
+        );
+        // const trendingResponse = await fetch("http://localhost:6969/trending");
+
 
         if (!trendingResponse.ok) {
           throw new Error("Network response was not ok");
@@ -31,7 +39,11 @@ const Home = () => {
         setTrendingTracks(trendingData.data);
 
         // Fetch data for charting albums
-        const chartingResponse = await fetch("http://localhost:6969/charting");
+        const chartingResponse = await fetch(
+          "https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart/0/albums"
+        );
+        // const chartingResponse = await fetch("http://localhost:6969/charting");
+
 
         if (!chartingResponse.ok) {
           throw new Error("Network response was not ok");
